@@ -12,8 +12,9 @@ public class ARController : MonoBehaviour {
     /// </summary>
     private List<TrackedPlane> m_NewPlanes = new List<TrackedPlane>();
 
-
     public GameObject TrackedPlanePrefab;
+    public GameObject Pokemon;
+    public GameObject ARCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,40 @@ public class ARController : MonoBehaviour {
           GameObject planeObject = Instantiate(TrackedPlanePrefab, Vector3.zero, Quaternion.identity,
               transform);
           planeObject.GetComponent<GridVisualizer>().Initialize(m_NewPlanes[i]);
+      }
+
+      // Check if user touched the screen
+      Touch touch;
+      if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began) {
+        return;
+      }
+
+      // Check if user touched a tracked plane
+      TrackableHit hit;
+      if(Frame.Raycast(touch.position.x, touch.position.y, TrackableHitFlags.PlaneWithinPolygon, out hit)) {
+        // Place entity on top of tracked plane
+
+        //Enable the entity
+        Pokemon.SetActive(true);
+
+        // Create a new Anchor
+        Anchor anchor = hit.Trackable.CreateAnchor(hit.Pose);
+
+        // Set poisiton of the pokemon to be the same as hit position
+        Pokemon.transform.position = hit.Pose.position;
+        Pokemon.transform.rotation = hit.Pose.rotation;
+
+        // Pokemon face camera
+        Vector3 cameraPosition = ARCamera.transform.position;
+
+        // Pokemon only rotate around Y Axis
+        cameraPosition.y = hit.Pose.position.y;
+
+        // Rotate the pokemon to face the camera
+        Pokemon.transform.LookAt(cameraPosition, Pokemon.transform.up);
+
+        Pokemon.transform.parent = anchor.transform;
+
       }
 
     }
