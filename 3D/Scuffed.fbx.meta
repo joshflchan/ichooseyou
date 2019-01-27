@@ -1,17 +1,55 @@
 fileFormatVersion: 2
-guid: 4c14a58979ccd1b49acfd70c646c0a3a
+guid: b69b4c2edbae4044781d9a8a1e958ef2
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: default
-    100002: //RootNode
-    400000: default
-    400002: //RootNode
-    2100000: defaultMat
-    2300000: default
-    3300000: default
-    4300000: default
+    100000: Armature
+    100002: Bone.004
+    100004: Bone.004_end
+    100006: Bone.005
+    100008: Bone.005_end
+    100010: Bone.010
+    100012: Bone.010_end
+    100014: Bone.011
+    100016: Bone.011_end
+    100018: Butt
+    100020: HEad
+    100022: HEad_end
+    100024: LShould
+    100026: polygon1_mat1
+    100028: RShould
+    100030: RThigh
+    100032: RThigh.001
+    100034: //RootNode
+    100036: Spine
+    100038: Tail
+    100040: Tail_end
+    400000: Armature
+    400002: Bone.004
+    400004: Bone.004_end
+    400006: Bone.005
+    400008: Bone.005_end
+    400010: Bone.010
+    400012: Bone.010_end
+    400014: Bone.011
+    400016: Bone.011_end
+    400018: Butt
+    400020: HEad
+    400022: HEad_end
+    400024: LShould
+    400026: polygon1_mat1
+    400028: RShould
+    400030: RThigh
+    400032: RThigh.001
+    400034: //RootNode
+    400036: Spine
+    400038: Tail
+    400040: Tail_end
+    2100000: mat1
+    2100002: mat2
+    4300000: polygon1_mat1
     9500000: //RootNode
+    13700000: polygon1_mat1
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -32,13 +70,12 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths:
-    - default
+    extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
@@ -65,7 +102,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
@@ -88,7 +125,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: default
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
