@@ -11,9 +11,10 @@ public class EnemyScript : MonoBehaviour {
 	public GameObject ember;
     // circle stuff
 	public IEnumerator GetAttack(Pokemon pokemon)
-    { if (i==0){
+    {
 		yield return new WaitForSeconds (2f);
       animator.enabled = true;
+			if (i==0){
       animator.Play("Ember");
 			yield return StartCoroutine(pokemon.AttackEnemyPokemon("Ember"));
       ember.gameObject.SetActive(true);
@@ -21,9 +22,7 @@ public class EnemyScript : MonoBehaviour {
 			animator.enabled = false;
       ember.gameObject.SetActive(false);
 			i++;
-		} if (i==1){
-		yield return new WaitForSeconds (2f);
-      animator.enabled = true;
+		} else if (i==1){
       animator.Play("Flamethrower");
 			yield return StartCoroutine(pokemon.AttackEnemyPokemon("Flamethrower"));
       flamethrower.gameObject.SetActive(true);
@@ -32,8 +31,6 @@ public class EnemyScript : MonoBehaviour {
       flamethrower.gameObject.SetActive(false);
 			i++;
 		} else if (i==2){
-		yield return new WaitForSeconds (2f);
-      animator.enabled = true;
       animator.Play("Itch");
       yield return new WaitForSeconds(3);
       animator.Play("Idle");
@@ -41,7 +38,7 @@ public class EnemyScript : MonoBehaviour {
 			yield return StartCoroutine(pokemon.AttackEnemyPokemon("Tackle"));
 			i=0;
 		}
-    }
+  }
 
 	// Use this for initialization
 	void Start () {

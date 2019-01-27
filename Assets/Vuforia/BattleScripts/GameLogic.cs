@@ -11,6 +11,7 @@ namespace Pokemans
 		public interface Pokemon
 		{
 			int GetHealth();
+			string GetType();
 			IEnumerator AttackEnemyPokemon(string attack);
 			IEnumerator DeductHealth(int atkPwr);
 		}
@@ -40,6 +41,7 @@ public class GameLogic : MonoBehaviour
 		private static string[] ATTACKS   = { "Water gun", "Bubbles", "Scratch" };
 		private static int[] ATTACK_POWER = { 40, 40, 40 };
 
+		private static string TYPE = "WATER";
 		private static int HEALTH_STAT = 132;
 		private static int ATTACK_STAT = 81;
 		private static int DEFENSE_STAT = 95;
@@ -58,6 +60,10 @@ public class GameLogic : MonoBehaviour
 		{
 			public string typeOfMove;
 			public int value;
+		}
+
+		public string GetType() {
+			return TYPE;
 		}
 
 		public Squirtle(GameLogic parent, bool isPlayer)
@@ -105,7 +111,7 @@ public class GameLogic : MonoBehaviour
 
 		public IEnumerator DeductHealth(int atkPwr)
 		{
-			UnityWebRequest www = UnityWebRequest.Get(getFormattedWaitingUrl(atkPwr));
+			UnityWebRequest www = UnityWebRequest.Get(getFormattedWaitingUrl(atkPwr, parent.enemyPokemon.GetType(), TYPE));
 			yield return www.SendWebRequest();
 
 			if (www.isNetworkError || www.isHttpError)
@@ -135,10 +141,12 @@ public class GameLogic : MonoBehaviour
 					+ "&defStat=" + DEFENSE_STAT;
 		}
 
-		private string getFormattedWaitingUrl(int atkPwr)
+		private string getFormattedWaitingUrl(int atkPwr, string activeType, string waitingType)
 		{
 			return WAITING_URL + "atkPwr=" + atkPwr
-					+ "&defStat=" + DEFENSE_STAT;
+					+ "&defStat=" + DEFENSE_STAT
+					+ "&activeType=" + activeType
+					+ "&waitingType=" + waitingType;
 		}
 	}
 		private class Charmander : Pokemon
@@ -146,6 +154,7 @@ public class GameLogic : MonoBehaviour
 			private static string[] ATTACKS   = { "Ember", "Flamethrower", "Tackle" };
 			private static int[] ATTACK_POWER = { 40, 40, 40 };
 
+			private static string TYPE = "FIRE";
 			private static int HEALTH_STAT = 132;
 			private static int ATTACK_STAT = 81;
 			private static int DEFENSE_STAT = 95;
@@ -186,6 +195,10 @@ public class GameLogic : MonoBehaviour
 				}
 			}
 
+			public string GetType() {
+				return TYPE;
+			}
+
 			public int GetHealth()
 			{
 				return health;
@@ -211,7 +224,7 @@ public class GameLogic : MonoBehaviour
 
 			public IEnumerator DeductHealth(int atkPwr)
 			{
-				UnityWebRequest www = UnityWebRequest.Get(getFormattedWaitingUrl(atkPwr));
+				UnityWebRequest www = UnityWebRequest.Get(getFormattedWaitingUrl(atkPwr, parent.enemyPokemon.GetType(), TYPE));
 				yield return www.SendWebRequest();
 
 				if (www.isNetworkError || www.isHttpError)
@@ -241,10 +254,12 @@ public class GameLogic : MonoBehaviour
 						+ "&defStat=" + DEFENSE_STAT;
 			}
 
-			private string getFormattedWaitingUrl(int atkPwr)
+			private string getFormattedWaitingUrl(int atkPwr, string activeType, string waitingType)
 			{
 				return WAITING_URL + "atkPwr=" + atkPwr
-						+ "&defStat=" + DEFENSE_STAT;
+						+ "&defStat=" + DEFENSE_STAT
+						+ "&activeType=" + activeType
+						+ "&waitingType=" + waitingType;
 			}
 		}
 
